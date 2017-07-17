@@ -1,37 +1,37 @@
 <?php
 
-// require the ShiftPlanning SDK class
-require('./../src/shiftplanning.php');
+// require the Humanity SDK class
+require('./../src/humanityapi.php');
 
 /* set the developer key on class initialization */
-$shiftplanning = new shiftplanning(
+$humanityapi = new humanityapi(
 	array(
 		'key' => 'XXXXXXXXXXXXXXXXXX' // enter your developer key
 	)
 );
 
 // or set the developer key using the setAppKey method
-//$shiftplanning->setAppKey( 'XXXXXXXXXXXXXXXXXX' );
+//humanityapi->setAppKey( 'XXXXXXXXXXXXXXXXXX' );
 
 /**
  *
  * Example SDK Usage
- * See Also: ShiftPlanning.SDK-tests.php
+ * See Also: Humanity.SDK-tests.php
  *
  */
 
 // check for a current active session
 // if a session exists, $session will now hold the user's information
-$session = $shiftplanning->getSession( );
+$session = $humanityapi->getSession( );
 
-echo "appKey: " . $shiftplanning->getAppKey( ) . "<br/>";		// returns the developer key currently set
-echo "appToken: " . $shiftplanning->getAppToken( ) . "<br/>";	// returns the token for the current session, error if not yet set
+echo "appKey: " . $humanityapi->getAppKey( ) . "<br/>";		// returns the developer key currently set
+echo "appToken: " . $humanityapi->getAppToken( ) . "<br/>";	// returns the token for the current session, error if not yet set
 
 if( !$session )
 {// if a session hasn't been started, create one
 
 	// perform a single API call to authenticate a user
-	$response = $shiftplanning->doLogin(
+	$response = $humanityapi->doLogin(
 		array(// these fields are required to login
 			'username' => 'jeffmarrone@qxdesigns.net',
 			'password' => 'dev1234',
@@ -40,7 +40,7 @@ if( !$session )
 
 	if( $response['status']['code'] == 1 )
 	{// check to make sure that login was successful
-		$session = $shiftplanning->getSession( );	// return the session data after successful login
+		$session = $humanityapi->getSession( );	// return the session data after successful login
 		echo "Hi, " . $session['employee']['name'] . "<br/>";
 	}
 	else
@@ -55,7 +55,7 @@ else
 	echo "Hi, " . $session['employee']['name'] . "<br/>";
 
 	/**
-	 * Quick Access ShiftPlanning SDK Methods:
+	 * Quick Access Humanity SDK Methods:
 	 * doLogin( $array_of_user_data )
 	 * doLogout( )
 	 * getMessages( )
@@ -136,12 +136,12 @@ else
 	 */
 
 	// Quick-Access Methods, to perform API calls more easily
-	$employees = $shiftplanning->getEmployees( );	// returns all employees
+	$employees = $humanityapi->getEmployees( );	// returns all employees
 	$employee_1_wage = $employees['data'][0]['wage'];
 	echo "Employee 1 Wage: $" . $employee_1_wage . "<br/>";
 	echo "Employee 1 Nick Name: " . $employees['data'][0]['nick_name'] . "<br/>";
 
-	$update_employee_record_response = $shiftplanning->updateEmployee(	// update employee record using Quick-Access method
+	$update_employee_record_response = $humanityapi->updateEmployee(	// update employee record using Quick-Access method
 		$employees['data'][0]['id'],
 		array(
 			'wage' => 75.00,
@@ -161,7 +161,7 @@ else
 	// perform multiple API calls in one request
 	// you can make up to 5 api calls per request
 	// make sure each call is its own array, and all calls are wrapped in an array
-	$response = $shiftplanning->setRequest(array(// array wrapper
+	$response = $humanityapi->setRequest(array(// array wrapper
 		array(// first api call (index=0)
 			'module' => 'messaging.message',
 			'method' => 'CREATE',
@@ -183,10 +183,10 @@ else
 		)
 	));
 
-	$send_message = $shiftplanning->getResponse(0);	// returns the response/data for the first api call (index=0)
-	$get_messages = $shiftplanning->getResponse(1);	// returns the response/data for the second api call (index=1)
-	$get_schedules = $shiftplanning->getResponse(2);	// returns the response/data for the third api call (index=2)
-	$get_settings = $shiftplanning->getResponse(3);	// returns the response/data for the fourth api call (index=3)
+	$send_message = $humanityapi->getResponse(0);	// returns the response/data for the first api call (index=0)
+	$get_messages = $humanityapi->getResponse(1);	// returns the response/data for the second api call (index=1)
+	$get_schedules = $humanityapi->getResponse(2);	// returns the response/data for the third api call (index=2)
+	$get_settings = $humanityapi->getResponse(3);	// returns the response/data for the fourth api call (index=3)
 
 	echo "Send Message Response: " . $send_message['status']['text'] . "<br/>";
 	echo "Get Messages Response: " . $get_messages['status']['text'] . "<br/>";
@@ -209,7 +209,7 @@ else
 			foreach( $get_messages['data'] as $number => $message )
 			{// loop through each message that was returned and delete it
 				// use Quick-Access deleteMessage() method
-				$delete_message_response = $shiftplanning->deleteMessage(  $message['id'] );
+				$delete_message_response = $humanityapi->deleteMessage(  $message['id'] );
 				echo "Delete Message ID {$message['id']} Response: " . $delete_message_response['status']['text'] . "<br/>";
 			}
 		}
@@ -226,6 +226,6 @@ else
 		print_r( $get_settings );
 	}
 
-	//$shiftplanning->doLogout();
+	//$humanityapi->doLogout();
 }
 ?>
