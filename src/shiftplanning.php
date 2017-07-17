@@ -1,13 +1,13 @@
 <?php
 /**
- * ShiftPlanning PHP SDK
- * Version: 1.0
- * Date: 11/01/2010
+ * Humanity PHP SDK
+ * Version: 2.0
+ * Date: 07/17/2017
  * http://www.humanity.com/api/
  */
 
 /**
- * Quick Access ShiftPlanning SDK Methods:
+ * Quick Access Humanity SDK Methods:
  * doLogin( $array_of_user_data )
  * doLogout( )
  * getMessages( )
@@ -87,7 +87,7 @@
  * 	)
  */
 
-class shiftplanning
+class humanityapi
 {//
 	private $_key;
 	private $_callback;
@@ -355,7 +355,7 @@ class shiftplanning
 				$message = 'The requested API method was not found in this SDK.';
 				break;
 			case 2 :
-				$message = 'The ShiftPlanning API is not responding.';
+				$message = 'The Humanity API is not responding.';
 				break;
 			case 3 :
 				$message = 'You must use the login method before accessing other modules of this API.';
@@ -367,10 +367,10 @@ class shiftplanning
 				$message = 'You must specify your Developer Key when using this SDK.';
 				break;
 			case 6 :
-				$message = 'The ShiftPlanning SDK needs the CURL PHP extension.';
+				$message = 'The Humanity SDK needs the CURL PHP extension.';
 				break;
 			case 7 :
-				$message = 'The ShiftPlanning SDK needs the JSON PHP extension.';
+				$message = 'The Humanity SDK needs the JSON PHP extension.';
 				break;
 			case 8 :
 				$message = 'File doesn\'t exist.';
