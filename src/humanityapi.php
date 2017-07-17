@@ -17,7 +17,8 @@
  * getWallMessages( )
  * createWallMessage( $array_of_message_data )
  * deleteWallMessage( $message_id, $array_of_other_message_data )
- * getEmployees( )
+ * getEmployees( $array_of_message_data )
+ * getEmployeesDisabled( )
  * getEmployeeDetails( $employee_id_number )
  * updateEmployee( $employee_id, $array_of_updated_employee_data )
  * createEmployee( $array_of_employee_data )
@@ -809,15 +810,29 @@ class humanityapi
 	 * Staff Methods
 	 *
 	 */
-	public function getEmployees( )
-	{// get a list of employees
-		return $this->setRequest(
-			array(
-				'module' => 'staff.employees',
-				'method' => 'GET'
-			)
-		);
-	}
+	public function getEmployees( $details = array( ) )
+    {// get a list of employees
+	return $this->setRequest(
+	    array_merge(
+		array(
+		    'module' => 'staff.employees',
+		    'method' => 'GET'
+		),
+		$details
+	    )
+	);
+    }
+
+    public function getEmployeesDisabled( )
+    {// get a list of disabled employees
+	return $this->setRequest(
+	    array(
+		'module' => 'staff.employees',
+		'method' => 'GET',
+		'disabled' => 1
+	    )
+	);
+    }
 
 	public function getEmployeeDetails( $id )
 	{// get details for a specific employee
