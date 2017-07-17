@@ -324,7 +324,7 @@ class humanityapi
 			case '-2' : $reason = 'Flagged API Key - Too Many invalid access attempts - contact us'; break;
 			case '-1' : $reason = 'Flagged API Key - Temporarily Disabled - contact us'; break;
 			case '1' : $reason = 'Success -'; break;
-			case '2' : $reason = 'Invalid API key - App must be granted a valid key by ShiftPlanning'; break;
+			case '2' : $reason = 'Invalid API key - App must be granted a valid key by Humanity'; break;
 			case '3' : $reason = 'Invalid token key - Please re-authenticate'; break;
 			case '4' : $reason = 'Invalid Method - No Method with that name exists in our API'; break;
 			case '5' : $reason = 'Invalid Module - No Module with that name exists in our API'; break;
@@ -337,7 +337,7 @@ class humanityapi
 			case '13' : $reason = 'Update Failed - Your UPDATE request failed'; break;
 			case '14' : $reason = 'Delete Failed - Your DELETE request failed'; break;
 			case '20' : $reason = 'Incorrect Permissions - You don\'t have the proper permissions to access this'; break;
-			case '90' : $reason = 'Suspended API key - Access for your account has been suspended, please contact ShiftPlanning'; break;
+			case '90' : $reason = 'Suspended API key - Access for your account has been suspended, please contact Humanity'; break;
 			case '91' : $reason = 'Throttle exceeded - You have exceeded the max allowed requests. Try again later.'; break;
 			case '98' : $reason = 'Bad API Paramaters - Invalid POST request. See Manual.'; break;
 			case '99' : $reason = 'Service Offline - This service is temporarily offline. Try again later.'; break;
@@ -348,7 +348,7 @@ class humanityapi
 	}
 
 	private function internal_errors( $errno )
-	{// errors internal to the ShiftPlanning SDK
+	{// errors internal to the Humanity SDK
 		switch( $errno )
 		{// internal error messages
 			case 1 :
