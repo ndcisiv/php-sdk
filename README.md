@@ -1,7 +1,7 @@
-ShiftPlanning PHP SDK
+Humanity PHP SDK
 ================
 
-The [ShiftPlanning API](http://www.humanity.com/api/) allows you to call modules within the ShiftPlanning [employee scheduling software](http://www.humanity.com/) that respond in REST style JSON & XML.
+The [Humanity API](http://www.humanity.com/api/) allows you to call modules within the ShiftPlanning [employee scheduling software](http://www.humanity.com/) that respond in REST style JSON & XML.
 
 This repository contains the open source PHP SDK that allows you to utilize the
 above on your website. Except as otherwise noted, the ShiftPlanning PHP SDK
@@ -17,9 +17,9 @@ have is:
 
 	<?php
 
-	require './shiftplanning.php';
+	require './humanityapi.php';
 
-	$shiftplanning = new shiftplanning(
+	$humanityapi = new humanityapi(
 		array(
 			'key' => 'XXXXXXXXXXXXXXXXXX' // enter your developer key
 		)
@@ -27,7 +27,7 @@ have is:
 
 To make [API][API] calls:
 
-	$shifts = $shiftplanning->setRequest(
+	$shifts = $humanityapi->setRequest(
 		array(
 			'module' => 'schedule.shifts',
 			'start_date' => 'today',
@@ -38,7 +38,7 @@ To make [API][API] calls:
 
 Logged in vs Logged out:
 
-	if ($session = $shiftplanning->getSession( )) {
+	if ($session = $humanityapi->getSession( )) {
 	  // LOGGED IN
 	} else {
 	  // LOGGED OUT
