@@ -1,7 +1,9 @@
 Humanity PHP SDK
 ================
 
-The [Humanity API](http://www.humanity.com/api/) allows you to call modules within the ShiftPlanning [employee scheduling software](http://www.humanity.com/) that respond in REST style JSON & XML.
+Forked from the original, for my personal use mainly.
+
+The [Humanity API](http://www.humanity.com/api/) allows you to call modules within the Humanity [employee scheduling software](http://www.humanity.com/) that respond in REST style JSON & XML.
 
 This repository contains the open source PHP SDK that allows you to utilize the
 above on your website. Except as otherwise noted, the ShiftPlanning PHP SDK
