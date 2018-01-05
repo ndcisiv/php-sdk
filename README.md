@@ -46,6 +46,19 @@ Logged in vs Logged out:
 	  // LOGGED OUT
 	}
 
+Example use of a Quick Access method
+
+    $array_of_employee_data = array(
+        'id'    =>  5150
+    );
+    $employee = $humanityapi->getEmployeeDetails($array_of_employee_data);
+    if ($employee->status == 1) {
+        echo "Employee Name: $employee->name";
+    }
+    else{
+        echo "No employee data available.";
+    }
+
 [examples]: https://github.com/shiftplanning/PHP-SDK/tree/master/examples/
 [API]: http://www.humanity.com/api/
 
