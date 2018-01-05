@@ -1430,6 +1430,69 @@ class humanityapi
      ******************************************************************
      */
 
+    public function getLocations( $location_details = array( ) ) 
+    {// get location locations
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'location.locations',
+                    'method' => 'GET'
+                ),
+                $location_details
+            )
+        );
+    }
+
+    public function getLocation( $location_details = array( ) )
+    {// get location location
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'location.location',
+                    'method' => 'GET'
+                ),
+                $location_details
+            )
+        );
+    }
+
+    public function createLocation( $location_details = array( ) )
+    {// create location location
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'location.location',
+                    'method' => 'CREATE'
+                ),
+                $location_details
+            )
+        );
+    }
+
+    public function updateLocation( $id, $location_details = array( ) )
+    {// update location location
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'location.location',
+                    'method' => 'UPDATE',
+                    'id' => $id
+                ),
+                $location_details
+            )
+        );
+    }
+
+    public function deleteLocation( $id )
+    {// delete location location
+        return $this->setRequest(
+            array(
+                'module' => 'location.location',
+                'method' => 'DELETE',
+                'id' => $id
+            )
+        );
+    }
 
 
     /**
