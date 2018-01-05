@@ -1,54 +1,28 @@
-<?php
-namespace Humanity\Api;
+<?php namespace Humanity;
+
 /**
  * Humanity PHP SDK
  * Version: 2.0
  * Date: 07/17/2017
  * http://www.humanity.com/api/
- */
-
-/**
+ *
+ *
  * Quick Access Humanity SDK Methods:
- * doLogin( $array_of_user_data )
- * doLogout( )
- * getMessages( )
- * getMessageDetails( $message_id )
- * createMessage( $array_of_message_data )
- * deleteMessage( $message_id )
- * getWallMessages( )
- * createWallMessage( $array_of_message_data )
- * deleteWallMessage( $message_id, $array_of_other_message_data )
- * getEmployees( $array_of_employee_data )
- * getEmployeesDisabled( )
- * getEmployeeDetails( $employee_id_number )
- * updateEmployee( $employee_id, $array_of_updated_employee_data )
- * createEmployee( $array_of_employee_data )
- * deleteEmployee( $employee_id )
- * getStaffSkills( )
- * getStaffSkillDetails( $skill_id )
- * createStaffSkill( $array_of_skill_data )
- * updateStaffSkill( $skill_id, $array_of_skill_data )
- * deleteStaffSkill( $skill_id )
- * createPing( $array_of_ping_data )
- * getSchedules( )
- * getScheduleDetails( $schedule_id )
- * createSchedule( $array_of_schedule_data )
- * updateSchedule( $schedule_id, $array_of_schedule_data )
- * deleteSchedule( $schedule_id )
- * getShifts( $array_of_shift_data )
- * getShiftDetails( $shift_id )
- * updateShift( $shift_id, $array_of_shift_data )
- * createShift( $array_of_shift_data )
- * deleteShift( $shift_id )
- * getVacationSchedules( $time_period_array )	// e.g. getVacationSchedules( array( 'start' => '', 'end' => '' ) );
- * getVacationScheduleDetails( $schedule_id )
- * createVacationSchedule( $array_of_schedule_data )
- * updateVacationSchedule( $schedule_id, $array_of_schedule_data )
- * deleteVacationSchedule( $schedule_id )
- * getScheduleConflicts( )
+ *
+ * **********************************
+ * API Functions
+ * **********************************
+ * getAPIConfig( $array_of_parameters )
+ * getAPIMethods( )
+ *
+ * **********************************
+ * Admin Functions
+ * **********************************
  * getAdminSettings( )
- * updateAdminSettings( $array_of_new_settings )
- * getAdminFiles( )
+ * updateAdminSettings( $array_of_settings_data )
+ * getAdminDetails( )
+ * updateAdminDetails( $array_of_admin_data )
+ * getAdminFiles( $array_of_parameters )
  * getAdminFileDetails( $file_id )
  * updateAdminFile( $file_id, $array_of_file_data )
  * createAdminFile( $array_of_file_data )
@@ -57,14 +31,149 @@ namespace Humanity\Api;
  * getAdminBackupDetails( $backup_id )
  * createAdminBackup( $array_of_backup_data )
  * deleteAdminBackup( $backup_id )
- * getAPIConfig( )
- * getAPIMethods( )
- * getTimeClocks( $start_date, $end_date, $schedule, $employee, $status )
- * getTimesheets( $period, $status )
- * getReportsTimesheets( $start_date, $end_date, $type, $employee, $location, $schedule, $skill, $deductbreaks )
- */
-
-/**
+ * getAdminNRequests( )
+ * getAdminBusiness( )
+ * getAdminGroupPerms( $array_of_parameters )
+ * updateAdminGroupPerms( $array_of_perms_data )
+ *
+ * **********************************
+ * Messaging Functions
+ * **********************************
+ * getMessages( $mode )
+ * getMessageDetails( $message_id )
+ * createMessage( $array_of_message_data )
+ * updateMessage( $array_of_message_data )
+ * deleteMessage( $message_id )
+ * createShiftMessage( $array_of_message_data )
+ * getWallMessages( )
+ * createWallMessage( $array_of_message_data )
+ * deleteWallMessage( $message_id, $delete_what )
+ * getMessagingNotices( $array_of_parameters )
+ * getMessagingNoticeDetails( $notice_id )
+ * updateMessagingNotice( $notice_id, $array_of_notice_data )
+ * createMessagingNotice( $array_of_notice_data )
+ * deleteMessagingNotice( $notice_id )
+ *
+ * **********************************
+ * Reports Functions
+ * **********************************
+ * getReportsSchedule( $array_of_parameters )
+ * getReportsBudget( $array_of_parameters )
+ * getReportsTimesheets( $array_of_parameters )
+ * getReportsEmployee( $array_of_parameters )
+ * getReportsCustom( $array_of_parameters )
+ * getReportsDailyPeakHoursNew( $array_of_parameters )
+ * getReportsDailyPeakHours( $array_of_parameters )
+ * getReportsGoogle( $array_of_parameters )
+ * getReportsWorkUnits( $array_of_parameters )
+ * getReportsWuDailyReport( $array_of_parameters )
+ * getReportsForecast( $array_of_parameters )
+ *
+ * **********************************
+ * Forecast Functions
+ * **********************************
+ *
+ *
+ * **********************************
+ * Payroll Functions
+ * **********************************
+ * getPayrollReport( $array_of_parmeters )
+ * getPayrollEnhancedReport( $array_of_parmeters )
+ * getRatecards( )
+ * getRatecardDetails( $ratecard_id )
+ * createRatecard( $array_of_ratecard_data )
+ * updateRatecard( $ratecard_id, $array_or_ratecard_data )
+ * deleteRatecard( $ratecard_id )
+ *
+ * **********************************
+ * Schedule Functions
+ * **********************************
+ * getSchedules( )
+ * getScheduleDetails( )
+ * createSchedule( $array_of_schedule_data )
+ * updateSchedule( $schedule_id, $array_of_schedule_data )
+ * deleteSchedule( $schedule_id )
+ * getShifts( $array_of_parameters )
+ * getShiftDetails( $shift_id )
+ * updateShift( $shift_id, $array_of_shift_data )
+ * createShift( $array_of_shift_data )
+ * deleteShift( $shift_id )
+ * getShiftHistory( $array_of_params )
+ * getShiftApproval( $shift_id )
+ * createShiftApproval( $shift_id )
+ * updateShiftApproval( $shift_id, $array_of_shift_data )
+ * getVacationSchedules( $array_of_parameters )
+ * getVacationScheduleDetails ( $vacation_id )
+ * createVacationSchedule( $array_of_vacation_data )
+ * updateVacationSchedule( $vacation_id, $array_of_vacation_data )
+ * deleteVacationSchedule( $vacation_id )
+ * getScheduleConflicts( $array_of_parameters )
+ *
+ * **********************************
+ * Timeclock Functions
+ * **********************************
+ * getTimeclocks( $array_of_parameters )
+ * getTimesheets( $array_of_parameters )
+ *
+ * **********************************
+ * Staff Functions
+ * **********************************
+ * doLogin( $array_of_parameters )
+ * doLogout( )
+ * getMe( )
+ * getEmployees( $array_of_parameters )
+ * getEmployeeDetails( $array_of_parameters )
+ * updateEmployee( $employee_id, $array_of_employee_data )
+ * createEmployee( $array_of_employee_data )
+ * deleteEmployee( $employee_id )
+ * getStaffSkills( )
+ * getStaffSkillDetails( $skill_id )
+ * createStaffSkill( $array_of_skill_data )
+ * updateStaffSkill( $skill_id, $array_of_skill_data )
+ * deleteStaffSkill( $skill_id )
+ * createPing( $array_of_parameters )
+ * **********************************
+ * Availability Functions
+ * **********************************
+ *
+ *
+ * **********************************
+ * Location Functions
+ * **********************************
+ * getLocations( $array_of_parameters )
+ * getLocationDetails( $location_id )
+ * createLocation( $array_of_location_data )
+ * updateLocation( $location_id, $array_of_location_data )
+ * deleteLocation( $location_id )
+ *
+ * **********************************
+ * Training Functions
+ * **********************************
+ *
+ *
+ * **********************************
+ * Group Functions
+ * **********************************
+ *
+ *
+ * **********************************
+ * Sales Functions
+ * **********************************
+ *
+ *
+ * **********************************
+ * Dashboard Functions
+ * **********************************
+ *
+ *
+ * **********************************
+ * Terminal Functions
+ * **********************************
+ *
+ *
+ *
+ *
+ *
  * All Quick-Access methods return a response like this:
  * array(
  * 	'status' => array( 'code' => '1', 'text' => 'Success', 'error' => 'Error message if any' ),
@@ -91,7 +200,6 @@ namespace Humanity\Api;
  * 		)
  * 	)
  */
-
 class HumanityApi
 {
     // Private Class Variables
@@ -741,7 +849,7 @@ class HumanityApi
      * @param array $params
      * @return mixed
      */
-    public function getAPIConfig( $params = array( ) )
+    public function getAPIConfig( $array_of_parameters = array( ) )
     {// get api config
         return $this->setRequest(
             array_merge(
@@ -749,7 +857,7 @@ class HumanityApi
                     'module' => 'api.config',
                     'method' => 'GET'
                 ),
-                $params
+                $array_of_parameters
             )
         );
     }
@@ -801,7 +909,7 @@ class HumanityApi
      * @param array $settings
      * @return mixed
      */
-    public function updateAdminSettings( $settings = array( ) )
+    public function updateAdminSettings( $array_of_settings_data = array( ) )
     {// update admin settings
         return $this->setRequest(
             array_merge(
@@ -809,7 +917,7 @@ class HumanityApi
                     'module' => 'admin.settings',
                     'method' => 'UPDATE'
                 ),
-                $settings
+                $array_of_settings_data
             )
         );
     }
@@ -837,7 +945,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function updateAdminDetails( $details = array( ) )
+    public function updateAdminDetails( $array_of_admin_data = array( ) )
     {// update admin details
         return $this->setRequest(
             array_merge(
@@ -845,7 +953,7 @@ class HumanityApi
                     'module' => 'admin.details',
                     'method' => 'UPDATE'
                 ),
-                $details
+                $array_of_admin_data
             )
         );
     }
@@ -861,7 +969,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getAdminFiles( $details = array( ) )
+    public function getAdminFiles( $array_of_parameters = array( ) )
     {// get admin files
         return $this->setRequest(
             array_merge(
@@ -869,7 +977,7 @@ class HumanityApi
                     'module' => 'admin.files',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -881,13 +989,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function getAdminFileDetails( $id )
+    public function getAdminFileDetails( $file_id )
     {// get admin file details
         return $this->setRequest(
             array(
                 'module' => 'admin.file',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $file_id
             )
         );
     }
@@ -900,16 +1008,16 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function updateAdminFile( $id, $details = array( ) )
+    public function updateAdminFile( $file_id, $array_of_file_data = array( ) )
     {// update admin file details
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'admin.file',
                     'method' => 'UPDATE',
-                    'id' => $id
+                    'id' => $file_id
                 ),
-                $details
+                $array_of_file_data
             )
         );
     }
@@ -921,16 +1029,16 @@ class HumanityApi
      * @param array $file_details
      * @return mixed
      */
-    public function createAdminFile( $file_details = array( ) )
+    public function createAdminFile( $array_of_file_data = array( ) )
     {// create new admin file
-        $file_details = array_merge( $file_details, $this->getFileData( $file_details['filename'] ) );
+        $array_of_file_data = array_merge( $array_of_file_data, $this->getFileData( $array_of_file_data['filename'] ) );
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'admin.file',
                     'method' => 'CREATE'
                 ),
-                $file_details
+                $array_of_file_data
             )
         );
     }
@@ -942,13 +1050,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteAdminFile( $id )
+    public function deleteAdminFile( $file_id )
     {// delete admin file
         return $this->setRequest(
             array(
                 'module' => 'admin.file',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $file_id
             )
         );
     }
@@ -977,13 +1085,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function getAdminBackupDetails( $id )
+    public function getAdminBackupDetails( $backup_id )
     {// get admin backup details
         return $this->setRequest(
             array(
                 'module' => 'admin.backup',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $backup_id
             )
         );
     }
@@ -995,16 +1103,16 @@ class HumanityApi
      * @param array $backup_details
      * @return mixed
      */
-    public function createAdminBackup( $backup_details = array( )  )
+    public function createAdminBackup( $array_of_backup_data = array( )  )
     {// create an admin backup
-        $backup_details = array_merge( $backup_details, $this->getFileData( $backup_details['filename'] ) );
+        $array_of_backup_data = array_merge( $array_of_backup_data, $this->getFileData( $array_of_backup_data['filename'] ) );
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'admin.backup',
                     'method' => 'CREATE'
                 ),
-                $backup_details
+                $array_of_backup_data
             )
         );
     }
@@ -1016,13 +1124,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteAdminBackup( $id )
+    public function deleteAdminBackup( $backup_id )
     {// delete an admin backup
         return $this->setRequest(
             array(
                 'module' => 'admin.backup',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $backup_id
             )
         );
     }
@@ -1068,7 +1176,7 @@ class HumanityApi
      * @param array $params
      * @return mixed
      */
-    public function getAdminGroupPerms( $params = array( ) )
+    public function getAdminGroupPerms( $array_of_parameters = array( ) )
     {// get admin group perms
         return $this->setRequest(
             array_merge(
@@ -1076,7 +1184,7 @@ class HumanityApi
                     'module' => 'admin.group_perms',
                     'method' => 'GET'
                 ),
-                $params
+                $array_of_parameters
             )
         );
     }
@@ -1088,7 +1196,7 @@ class HumanityApi
      * @param array $group_perms
      * @return mixed
      */
-    public function updateAdminGroupPerms( $group_perms = array( ) )
+    public function updateAdminGroupPerms( $array_of_perms_data = array( ) )
     {// update admin group perms
         return $this->setRequest(
             array_merge(
@@ -1096,17 +1204,9 @@ class HumanityApi
                     'module' => 'admin.group_perms',
                     'method' => 'UPDATE'
                 ),
-                $group_perms
+                $array_of_perms_data
             )
         );
-    }
-
-    /**
-     * Unused for now
-     */
-    public function deleteAdminAvatar( )
-    {// here for future use, was undocumented as of 1/5/2018
-
     }
 
 
@@ -1143,13 +1243,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function getMessageDetails( $id )
+    public function getMessageDetails( $message_id )
     {// get message details for a specific message
         return $this->setRequest(
             array(
                 'module' => 'messaging.message',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $message_id
             )
         );
     }
@@ -1161,7 +1261,7 @@ class HumanityApi
      * @param array $message
      * @return mixed
      */
-    public function createMessage( $message = array( ) )
+    public function createMessage( $array_of_message_data = array( ) )
     {// create a new message
         return $this->setRequest(
             array_merge(
@@ -1169,7 +1269,7 @@ class HumanityApi
                     'module' => 'messaging.message',
                     'method' => 'CREATE'
                 ),
-                $message
+                $array_of_message_data
             )
         );
     }
@@ -1181,15 +1281,16 @@ class HumanityApi
      * @param array $message
      * @return mixed
      */
-    public function updateMessage( $message = array( ) )
+    public function updateMessage( $message_id, $array_of_message_data = array( ) )
     {// update messaging message
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'messaging.message',
-                    'method' => 'UPDATE'
+                    'method' => 'UPDATE',
+                    'id' => $message_id
                 ),
-                $message
+                $array_of_message_data
             )
         );
     }
@@ -1201,13 +1302,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteMessage( $id )
+    public function deleteMessage( $message_id )
     {// delete a message
         return $this->setRequest(
             array(
                 'module' => 'messaging.message',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $message_id
             )
         );
     }
@@ -1219,7 +1320,7 @@ class HumanityApi
      * @param array $message_details
      * @return mixed
      */
-    public function createShiftMessage( $message_details = array( ) )
+    public function createShiftMessage( $array_of_message_data = array( ) )
     {// create messaging shift
         return $this->setRequest(
             array_merge(
@@ -1227,7 +1328,7 @@ class HumanityApi
                     'module' => 'messaging.shift',
                     'method' => 'CREATE'
                 ),
-                $message_details
+                $array_of_message_data
             )
         );
     }
@@ -1257,7 +1358,7 @@ class HumanityApi
      * @param array $message
      * @return mixed
      */
-    public function createWallMessage( $message = array( ) )
+    public function createWallMessage( $array_of_message_data = array( ) )
     {// create a wall message
         return $this->setRequest(
             array_merge(
@@ -1265,7 +1366,7 @@ class HumanityApi
                     'module' => 'messaging.wall',
                     'method' => 'CREATE'
                 ),
-                $message
+                $array_of_message_data
             )
         );
     }
@@ -1278,16 +1379,14 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function deleteWallMessage( $id, $details = array( ) )
+    public function deleteWallMessage( $message_id, $delete_what = 0 )
     {// delete a wall message
         return $this->setRequest(
-            array_merge(
-                array(
-                    'module' => 'messaging.wall',
-                    'method' => 'DELETE',
-                    'id' => $id
-                ),
-                $details
+            array(
+                'module' => 'messaging.wall',
+                'method' => 'DELETE',
+                'id' => $message_id,
+                'delete' => $delete_what
             )
         );
     }
@@ -1298,7 +1397,7 @@ class HumanityApi
      * @param array $params
      * @return mixed
      */
-    public function getMessagingNotices( $params = array( ) )
+    public function getMessagingNotices( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1306,7 +1405,7 @@ class HumanityApi
                     'module' => 'messaging.notices',
                     'method' => 'GET'
                 ),
-                $params
+                $array_of_parameters
             )
         );
     }
@@ -1317,13 +1416,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function getMessagingNoticeDetails( $id )
+    public function getMessagingNoticeDetails( $notice_id )
     {// get messaging notice details for a specific message
         return $this->setRequest(
             array(
                 'module' => 'messaging.notice',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $notice_id
             )
         );
     }
@@ -1335,16 +1434,16 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function updateMessagingNotice( $id, $details = array( ) )
+    public function updateMessagingNotice( $notice_id, $array_of_notice_data = array( ) )
     {// update messaging notice
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'messaging.notice',
                     'method' => 'UPDATE',
-                    'id' => $id
+                    'id' => $notice_id
                 ),
-                $details
+                $array_of_notice_data
             )
         );
     }
@@ -1355,7 +1454,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function createMessagingNotice( $details = array( ) )
+    public function createMessagingNotice( $array_of_notice_data = array( ) )
     {// create messaging notice
         return $this->setRequest(
             array_merge(
@@ -1363,7 +1462,7 @@ class HumanityApi
                     'module' => 'messaging.notice',
                     'method' => 'CREATE'
                 ),
-                $details
+                $array_of_notice_data
             )
         );
     }
@@ -1374,13 +1473,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteMessagingNotice( $id )
+    public function deleteMessagingNotice( $notice_id )
     {// delete messaging notice details for a specific message
         return $this->setRequest(
             array(
                 'module' => 'messaging.notice',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $notice_id
             )
         );
     }
@@ -1400,7 +1499,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsSchedule( $details = array( ) )
+    public function getReportsSchedule( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1408,7 +1507,7 @@ class HumanityApi
                     'module' => 'reports.schedule',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1420,7 +1519,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsBudget( $details = array( ) )
+    public function getReportsBudget( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1428,7 +1527,7 @@ class HumanityApi
                     'module' => 'reports.budget',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1440,7 +1539,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsTimesheets( $details = array( ) )
+    public function getReportsTimesheets( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1448,7 +1547,7 @@ class HumanityApi
                     'module' => 'reports.timesheets',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1460,7 +1559,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsEmployee( $details = array( ) )
+    public function getReportsEmployee( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1468,7 +1567,7 @@ class HumanityApi
                     'module' => 'reports.employee',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1480,7 +1579,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsCustom( $details = array( ) )
+    public function getReportsCustom( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1488,7 +1587,7 @@ class HumanityApi
                     'module' => 'reports.custom',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1499,7 +1598,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsDailyPeakHoursNew( $details = array( ) )
+    public function getReportsDailyPeakHoursNew( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1507,7 +1606,7 @@ class HumanityApi
                     'module' => 'reports.daily_peak_hours_new',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1519,7 +1618,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsDailyPeakHours( $details = array( ) )
+    public function getReportsDailyPeakHours( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1527,7 +1626,7 @@ class HumanityApi
                     'module' => 'reports.daily_peak_hours',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1538,7 +1637,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsGoogle( $details = array( ) )
+    public function getReportsGoogle( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1546,7 +1645,7 @@ class HumanityApi
                     'module' => 'reports.google',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1558,7 +1657,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsWorkUnits( $details = array( ) )
+    public function getReportsWorkUnits( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1566,7 +1665,7 @@ class HumanityApi
                     'module' => 'reports.workunits',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1578,7 +1677,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsWuDailyReport( $details = array( ) )
+    public function getReportsWuDailyReport( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1586,7 +1685,7 @@ class HumanityApi
                     'module' => 'reports.wu_daily_report',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1597,7 +1696,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getReportsForecast( $details = array( ) )
+    public function getReportsForecast( $array_of_parameters = array( ) )
     {
         return $this->setRequest(
             array_merge(
@@ -1605,7 +1704,7 @@ class HumanityApi
                     'module' => 'reports.forecast',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -1633,7 +1732,7 @@ class HumanityApi
      * @param array $report_details
      * @return mixed
      */
-    public function getPayrollReport( $report_details = array( ) )
+    public function getPayrollReport( $array_of_parameters = array( ) )
     {// get payroll report
         return $this->setRequest(
             array_merge(
@@ -1641,7 +1740,7 @@ class HumanityApi
                     'module' => 'payroll.report',
                     'method' => 'GET'
                 ),
-                $report_details
+                $array_of_parameters
             )
         );
     }
@@ -1652,7 +1751,7 @@ class HumanityApi
      * @param array $report_details
      * @return mixed
      */
-    public function getPayrollEnhancedReport( $report_details = array( ) )
+    public function getPayrollEnhancedReport( $array_of_parameters = array( ) )
     {// get payroll enhancedreport
         return $this->setRequest(
             array_merge(
@@ -1660,7 +1759,7 @@ class HumanityApi
                     'module' => 'payroll.enhancedreport',
                     'method' => 'GET'
                 ),
-                $report_details
+                $array_of_parameters
             )
         );
     }
@@ -1688,13 +1787,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function getRatecardDetails( $id )
+    public function getRatecardDetails( $ratecard_id )
     {// get payroll ratecard
         return $this->setRequest(
             array(
                 'module' => 'payroll.ratecard',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $ratecard_id
             )
         );
     }
@@ -1706,7 +1805,7 @@ class HumanityApi
      * @param array $ratecard_details
      * @return mixed
      */
-    public function createRatecard( $ratecard_details = array( ) )
+    public function createRatecard( $array_of_ratecard_data = array( ) )
     {// create payroll ratecard
         return $this->setRequest(
             array_merge(
@@ -1714,7 +1813,7 @@ class HumanityApi
                     'module' => 'payroll.ratecard',
                     'method' => 'CREATE'
                 ),
-                $ratecard_details
+                $array_of_ratecard_data
             )
         );
     }
@@ -1727,16 +1826,16 @@ class HumanityApi
      * @param array $ratecard_details
      * @return mixed
      */
-    public function updateRatecard( $id, $ratecard_details = array( ) )
+    public function updateRatecard( $ratecard_id, $array_of_ratecard_data = array( ) )
     {// update payroll ratecard
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'payroll.ratecard',
                     'method' => 'UPDATE',
-                    'id' => $id
+                    'id' => $ratecard_id
                 ),
-                $ratecard_details
+                $array_of_ratecard_data
             )
         );
     }
@@ -1748,13 +1847,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteRatecard( $id )
+    public function deleteRatecard( $ratecard_id )
     {// delete payroll ratecard
         return $this->setRequest(
             array(
                 'module' => 'payroll.ratecard',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $ratecard_id
             )
         );
     }
@@ -1789,13 +1888,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function getScheduleDetails( $id )
+    public function getScheduleDetails( $schedule_id )
     {// get schedule details
         return $this->setRequest(
             array(
                 'module' => 'schedule.schedule',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $schedule_id
             )
         );
     }
@@ -1807,7 +1906,7 @@ class HumanityApi
      * @param array $schedule_details
      * @return mixed
      */
-    public function createSchedule( $schedule_details = array( ) )
+    public function createSchedule( $array_of_schedule_data = array( ) )
     {// create a new schedule
         return $this->setRequest(
             array_merge(
@@ -1815,7 +1914,7 @@ class HumanityApi
                     'module' => 'schedule.schedule',
                     'method' => 'CREATE'
                 ),
-                $schedule_details
+                $array_of_schedule_data
             )
         );
     }
@@ -1828,16 +1927,16 @@ class HumanityApi
      * @param array $schedule_details
      * @return mixed
      */
-    public function updateSchedule( $id, $schedule_details = array( ) )
+    public function updateSchedule( $schedule_id, $array_of_schedule_data = array( ) )
     {// update an existing schedule
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'schedule.schedule',
                     'method' => 'UPDATE',
-                    'id' => $id
+                    'id' => $schedule_id
                 ),
-                $schedule_details
+                $array_of_schedule_data
             )
         );
     }
@@ -1849,13 +1948,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteSchedule( $id )
+    public function deleteSchedule( $schedule_id )
     {// delete an existing schedule
         return $this->setRequest(
             array(
                 'module' => 'schedule.schedule',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $schedule_id
             )
         );
     }
@@ -1867,7 +1966,7 @@ class HumanityApi
      * @param array $shift_filters
      * @return mixed
      */
-    public function getShifts( $shift_filters = array() )
+    public function getShifts( $array_of_parameters = array() )
     {// get shifts
         return $this->setRequest(
             array_merge(
@@ -1875,7 +1974,7 @@ class HumanityApi
                     'module' => 'schedule.shifts',
                     'method' => 'GET'
                 ),
-                $shift_filters
+                $array_of_parameters
             )
         );
     }
@@ -1887,13 +1986,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function getShiftDetails( $id )
+    public function getShiftDetails( $shift_id )
     {// get shift details
         return $this->setRequest(
             array(
                 'module' => 'schedule.shift',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $shift_id
             )
         );
     }
@@ -1906,16 +2005,16 @@ class HumanityApi
      * @param array $shift_details
      * @return mixed
      */
-    public function updateShift( $id, $shift_details = array( ) )
+    public function updateShift( $shift_id, $array_of_shift_data = array( ) )
     {// update shift details
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'schedule.shift',
                     'method' => 'UPDATE',
-                    'id' => $id
+                    'id' => $shift_id
                 ),
-                $shift_details
+                $array_of_shift_data
             )
         );
     }
@@ -1927,7 +2026,7 @@ class HumanityApi
      * @param array $shift_details
      * @return mixed
      */
-    public function createShift( $shift_details = array( ) )
+    public function createShift( $array_of_shift_data = array( ) )
     {// create a new shift
         return $this->setRequest(
             array_merge(
@@ -1935,7 +2034,7 @@ class HumanityApi
                     'module' => 'schedule.shift',
                     'method' => 'CREATE'
                 ),
-                $shift_details
+                $array_of_shift_data
             )
         );
     }
@@ -1947,13 +2046,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteShift( $id )
+    public function deleteShift( $shift_id )
     {// delete a shift
         return $this->setRequest(
             array(
                 'module' => 'schedule.shift',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $shift_id
             )
         );
     }
@@ -1964,7 +2063,7 @@ class HumanityApi
      * @param array $params
      * @return mixed
      */
-    public function getShiftHistory( $params = array( ) )
+    public function getShiftHistory( $array_of_parameters = array( ) )
     {// get schedule shift history
         return $this->setRequest(
             array_merge(
@@ -1972,7 +2071,7 @@ class HumanityApi
                     'module' => 'schedule.shifthistory',
                     'method' => 'GET'
                 ),
-                $params
+                $array_of_parameters
             )
         );
     }
@@ -1984,13 +2083,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function getShiftApproval( $id )
+    public function getShiftApproval( $approval_id )
     {// get schedule shift approval
         return $this->setRequest(
             array(
                 'module' => 'schedule.shiftapprove',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $approval_id
             )
         );
     }
@@ -2002,13 +2101,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function createShiftApproval( $id )
+    public function createShiftApproval( $shift_id )
     {// create schedule shift approval
         return $this->setRequest(
             array(
                 'module' => 'schedule.shiftapprove',
                 'method' => 'CREATE',
-                'id' => $id
+                'id' => $shift_id
             )
         );
     }
@@ -2021,16 +2120,16 @@ class HumanityApi
      * @param array $shift_details
      * @return mixed
      */
-    public function updateShiftApproval( $id, $shift_details = array( ) )
+    public function updateShiftApproval( $approval_id, $array_of_approval_data = array( ) )
     {// update a shift approval
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'schedule.shiftapprove',
                     'method' => 'UPDATE',
-                    'id' => $id
+                    'id' => $approval_id
                 ),
-                $shift_details
+                $array_of_approval_data
             )
         );
     }
@@ -2042,7 +2141,7 @@ class HumanityApi
      * @param array $time_period
      * @return mixed
      */
-    public function getVacationSchedules( $time_period = array( ) )
+    public function getVacationSchedules( $array_of_parameters = array( ) )
     {// get schedule vacations, pass start and end params to get vacations within a certian time-period
         return $this->setRequest(
             array_merge(
@@ -2050,7 +2149,7 @@ class HumanityApi
                     'module' => 'schedule.vacations',
                     'method' => 'GET'
                 ),
-                $time_period
+                $array_of_parameters
             )
         );
     }
@@ -2062,13 +2161,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function getVacationScheduleDetails( $id )
+    public function getVacationScheduleDetails( $vacation_id )
     {// get vacation schedule details
         return $this->setRequest(
             array(
                 'module' => 'schedule.vacation',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $vacation_id
             )
         );
     }
@@ -2080,7 +2179,7 @@ class HumanityApi
      * @param array $vacation_details
      * @return mixed
      */
-    public function createVacationSchedule( $vacation_details = array( ) )
+    public function createVacationSchedule( $array_of_vacation_data = array( ) )
     {// create a vacation schedule
         return $this->setRequest(
             array_merge(
@@ -2088,7 +2187,7 @@ class HumanityApi
                     'module' => 'schedule.vacation',
                     'method' => 'CREATE'
                 ),
-                $vacation_details
+                $array_of_vacation_data
             )
         );
     }
@@ -2101,16 +2200,16 @@ class HumanityApi
      * @param array $vacation_details
      * @return mixed
      */
-    public function updateVacationSchedule( $id, $vacation_details = array( ) )
+    public function updateVacationSchedule( $vacation_id, $array_of_vacation_data = array( ) )
     {// update a vacation schedule
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'schedule.vacation',
                     'method' => 'UPDATE',
-                    'id' => $id
+                    'id' => $vacation_id
                 ),
-                $vacation_details
+                $array_of_vacation_data
             )
         );
     }
@@ -2122,13 +2221,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteVacationSchedule( $id )
+    public function deleteVacationSchedule( $vacation_id )
     {// delete a vacation schedule
         return $this->setRequest(
             array(
                 'module' => 'schedule.vacation',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $vacation_id
             )
         );
     }
@@ -2140,7 +2239,7 @@ class HumanityApi
      * @param array $time_period
      * @return mixed
      */
-    public function getScheduleConflicts( $time_period = array( ) )
+    public function getScheduleConflicts( $array_of_parameters = array( ) )
     {// get schedule conflicts
         return $this->setRequest(
             array_merge(
@@ -2148,7 +2247,7 @@ class HumanityApi
                     'module' => 'schedule.conflicts',
                     'method' => 'GET'
                 ),
-                $time_period
+                $array_of_parameters
             )
         );
     }
@@ -2168,14 +2267,14 @@ class HumanityApi
      * @param $details
      * @return mixed
      */
-    public function getTimeclocks($details) {
+    public function getTimeclocks($array_of_parameters) {
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'timeclock.timeclocks',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -2187,14 +2286,14 @@ class HumanityApi
      * @param $details
      * @return mixed
      */
-    public function getTimesheets($details) {
+    public function getTimesheets($array_of_parameters) {
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'timeclock.timesheets',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -2213,14 +2312,14 @@ class HumanityApi
      * @param array $user
      * @return mixed
      */
-    public function doLogin( $user = array( ) )
+    public function doLogin( $array_of_parameters = array( ) )
     {// perform a login api call
         return $this->setRequest(
             array(
                 'module' => 'staff.login',
                 'method' => 'GET',
-                'username' => $user['username'],
-                'password' => $user['password']
+                'username' => $array_of_parameters['username'],
+                'password' => $array_of_parameters['password']
             )
         );
     }
@@ -2260,7 +2359,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getEmployees( $details = array( ) )
+    public function getEmployees( $array_of_parameters = array( ) )
     {// get a list of employees
         return $this->setRequest(
             array_merge(
@@ -2268,7 +2367,7 @@ class HumanityApi
                     'module' => 'staff.employees',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -2280,7 +2379,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function getEmployee( $details = array( ) )
+    public function getEmployeeDetails( $array_of_parameters = array( ) )
     {// get details for a specific employee
         return $this->setRequest(
             array_merge(
@@ -2288,7 +2387,7 @@ class HumanityApi
                     'module' => 'staff.employee',
                     'method' => 'GET'
                 ),
-                $details
+                $array_of_parameters
             )
         );
     }
@@ -2300,15 +2399,16 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function updateEmployee( $details = array( ) )
+    public function updateEmployee( $employee_id, $array_of_employee_data = array( ) )
     {// update an employee record
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'staff.employee',
-                    'method' => 'UPDATE'
+                    'method' => 'UPDATE',
+                    'id' => $employee_id
                 ),
-                $details
+                $array_of_employee_data
             )
         );
     }
@@ -2320,7 +2420,7 @@ class HumanityApi
      * @param array $details
      * @return mixed
      */
-    public function createEmployee( $details = array( ) )
+    public function createEmployee( $array_of_employee_data = array( ) )
     {// create a new employee record
         return $this->setRequest(
             array_merge(
@@ -2328,7 +2428,7 @@ class HumanityApi
                     'module' => 'staff.employee',
                     'method' => 'CREATE'
                 ),
-                $details
+                $array_of_employee_data
             )
         );
     }
@@ -2340,13 +2440,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteEmployee( $id )
+    public function deleteEmployee( $employee_id )
     {// delete an employee
         return $this->setRequest(
             array(
                 'module' => 'staff.employee',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $employee_id
             )
         );
     }
@@ -2374,13 +2474,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function getStaffSkillDetails( $id )
+    public function getStaffSkillDetails( $skill_id )
     {// get staff skill details
         return $this->setRequest(
             array(
                 'module' => 'staff.skill',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $skill_id
             )
         );
     }
@@ -2392,7 +2492,7 @@ class HumanityApi
      * @param array $skill_details
      * @return mixed
      */
-    public function createStaffSkill( $skill_details = array( ) )
+    public function createStaffSkill( $array_of_skill_data = array( ) )
     {// create staff skill
         return $this->setRequest(
             array_merge(
@@ -2400,7 +2500,7 @@ class HumanityApi
                     'module' => 'staff.skill',
                     'method' => 'CREATE'
                 ),
-                $skill_details
+                $array_of_skill_data
             )
         );
     }
@@ -2413,16 +2513,16 @@ class HumanityApi
      * @param array $skill_details
      * @return mixed
      */
-    public function updateStaffSkill( $id, $skill_details = array( ) )
+    public function updateStaffSkill( $skill_id, $array_of_skill_data = array( ) )
     {// update staff skill
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'staff.skill',
                     'method' => 'UPDATE',
-                    'id' => $id
+                    'id' => $skill_id
                 ),
-                $skill_details
+                $array_of_skill_data
             )
         );
     }
@@ -2434,13 +2534,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteStaffSkill( $id )
+    public function deleteStaffSkill( $skill_id )
     {// delete staff skill
         return $this->setRequest(
             array(
                 'module' => 'staff.skill',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $skill_id
             )
         );
     }
@@ -2452,7 +2552,7 @@ class HumanityApi
      * @param array $ping_data
      * @return mixed
      */
-    public function createPing( $ping_data = array( ) )
+    public function createPing( $array_of_parameters = array( ) )
     {// create a ping
         return $this->setRequest(
             array_merge(
@@ -2460,7 +2560,7 @@ class HumanityApi
                     'module' => 'staff.ping',
                     'method' => 'CREATE'
                 ),
-                $ping_data
+                $array_of_parameters
             )
         );
     }
@@ -2488,7 +2588,7 @@ class HumanityApi
      * @param array $location_details
      * @return mixed
      */
-    public function getLocations( $location_details = array( ) ) 
+    public function getLocations( $array_of_parameters = array( ) )
     {// get location locations
         return $this->setRequest(
             array_merge(
@@ -2496,7 +2596,7 @@ class HumanityApi
                     'module' => 'location.locations',
                     'method' => 'GET'
                 ),
-                $location_details
+                $array_of_parameters
             )
         );
     }
@@ -2508,13 +2608,13 @@ class HumanityApi
      * @param array $location_details
      * @return mixed
      */
-    public function getLocationDetails( $id )
+    public function getLocationDetails( $location_id )
     {// get location location
         return $this->setRequest(
             array(
                 'module' => 'location.location',
                 'method' => 'GET',
-                'id' => $id
+                'id' => $location_id
             )
         );
     }
@@ -2526,7 +2626,7 @@ class HumanityApi
      * @param array $location_details
      * @return mixed
      */
-    public function createLocation( $location_details = array( ) )
+    public function createLocation( $array_of_location_data = array( ) )
     {// create location location
         return $this->setRequest(
             array_merge(
@@ -2534,7 +2634,7 @@ class HumanityApi
                     'module' => 'location.location',
                     'method' => 'CREATE'
                 ),
-                $location_details
+                $array_of_location_data
             )
         );
     }
@@ -2547,16 +2647,16 @@ class HumanityApi
      * @param array $location_details
      * @return mixed
      */
-    public function updateLocation( $id, $location_details = array( ) )
+    public function updateLocation( $location_id, $array_of_location_data = array( ) )
     {// update location location
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'location.location',
                     'method' => 'UPDATE',
-                    'id' => $id
+                    'id' => $location_id
                 ),
-                $location_details
+                $array_of_location_data
             )
         );
     }
@@ -2568,13 +2668,13 @@ class HumanityApi
      * @param $id
      * @return mixed
      */
-    public function deleteLocation( $id )
+    public function deleteLocation( $location_id )
     {// delete location location
         return $this->setRequest(
             array(
                 'module' => 'location.location',
                 'method' => 'DELETE',
-                'id' => $id
+                'id' => $location_id
             )
         );
     }
