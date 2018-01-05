@@ -990,12 +990,142 @@ class HumanityApi
      ******************************************************************
      */
 
+    public function getReportsSchedule( $details = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'reports.schedule',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
+    public function getReportsBudget( $details = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'reports.budget',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
     public function getReportsTimesheets( $details = array( ) )
     {
         return $this->setRequest(
             array_merge(
                 array(
                     'module' => 'reports.timesheets',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
+    public function getReportsEmployee( $details = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'reports.employee',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
+    public function getReportsCustom( $details = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'reports.custom',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
+    public function getReportsDailyPeakHoursNew( $details = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'reports.daily_peak_hours_new',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
+    public function getReportsDailyPeakHours( $details = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'reports.daily_peak_hours',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
+    public function getReportsGoogle( $details = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'reports.google',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
+    public function getReportsWorkUnits( $details = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'reports.workunits',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
+    public function getReportsWuDailyReport( $details = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'reports.wu_daily_report',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
+    public function getReportsForecast( $details = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'reports.forecast',
                     'method' => 'GET'
                 ),
                 $details
