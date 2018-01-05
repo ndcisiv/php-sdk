@@ -1,4 +1,5 @@
 <?php
+namespace Humanity\Api;
 /**
  * Humanity PHP SDK
  * Version: 2.0
@@ -91,22 +92,22 @@
  * 	)
  */
 
-class humanityapi
+class HumanityApi
 {
     // Private Class Variables
     private $_key;
     private $_callback;
     private $_init;
     private $_debug;
-    private $request = array( );
-    private $requests = array( );
-    private $response = array( );
-    private $raw_response = array( );
+    private $request            =   array( );
+    private $requests           =   array( );
+    private $response           =   array( );
+    private $raw_response       =   array( );
 
     // constants
-    const session_identifier = 'SP';
-    const api_endpoint = 'https://www.humanity.com/api/';
-    const output_type = 'json';
+    const SESSION_IDENTIFIER    =   'SP';
+    const API_ENDPOINT          =   'https://www.humanity.com/api/';
+    const OUTPUT_TYPE           =   'json';
 
     /**
      ******************************************************************
@@ -200,7 +201,7 @@ class humanityapi
         unset( $this->requests );
 
         // set the default response type of JSON
-        $this->request['output'] = self::output_type;
+        $this->request['output'] = self::OUTPUT_TYPE;
 
         $this->_init = 0;
 
@@ -238,7 +239,7 @@ class humanityapi
 
     protected function startSession( )
     {// start the session
-        session_name( self::session_identifier );
+        session_name( self::SESSION_IDENTIFIER );
         session_start( );
     }
 
@@ -643,7 +644,7 @@ class humanityapi
     {// perform the api request
         try
         {//
-            $ch = curl_init( self::api_endpoint );
+            $ch = curl_init( self::API_ENDPOINT );
 
             $filedata = '';
             if( is_array( $this->requests ) )
@@ -661,7 +662,7 @@ class humanityapi
             $post = $filedata ? array( 'data'=> json_encode( $this->getRequest( ) ),
                 'filedata' => $filedata ) : array( 'data' => json_encode( $this->getRequest( ) ) );
 
-            curl_setopt( $ch, CURLOPT_URL, self::api_endpoint );
+            curl_setopt( $ch, CURLOPT_URL, self::API_ENDPOINT );
             curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 0 );
             curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
             curl_setopt( $ch, CURLOPT_POST, 1 );
