@@ -1018,6 +1018,90 @@ class humanityapi
      ******************************************************************
      */
 
+    public function getPayrollReport( $report_details = array( ) )
+    {// get payroll report
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'payroll.report',
+                    'method' => 'GET'
+                ),
+                $report_details
+            )
+        );
+    }
+
+    public function getPayrollEnhancedReport( $report_details = array( ) )
+    {// get payroll enhancedreport
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'payroll.enhancedreport',
+                    'method' => 'GET'
+                ),
+                $report_details
+            )
+        );
+    }
+
+    public function getRatecards( )
+    {// get payroll ratecards
+        return $this->setRequest(
+            array(
+                'module' => 'payroll.ratecards',
+                'method' => 'GET'
+            )
+        );
+    }
+
+    public function getRatecard( $id )
+    {// get payroll ratecard
+        return $this->setRequest(
+            array(
+                'module' => 'payroll.ratecard',
+                'method' => 'GET',
+                'id' => $id
+            )
+        );
+    }
+
+    public function createRatecard( $ratecard_details = array( ) )
+    {// create payroll ratecard
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'payroll.ratecard',
+                    'method' => 'CREATE'
+                ),
+                $ratecard_details
+            )
+        );
+    }
+
+    public function updateRatecard( $id, $ratecard_details = array( ) )
+    {// update payroll ratecard
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'payroll.ratecard',
+                    'method' => 'UPDATE',
+                    'id' => $id
+                ),
+                $ratecard_details
+            )
+        );
+    }
+
+    public function deleteRatecard( $id )
+    {// delete payroll ratecard
+        return $this->setRequest(
+            array(
+                'module' => 'payroll.ratecard',
+                'method' => 'DELETE',
+                'id' => $id
+            )
+        );
+    }
 
 
     /**
