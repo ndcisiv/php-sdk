@@ -132,6 +132,7 @@
  * updateStaffSkill( $skill_id, $array_of_skill_data )
  * deleteStaffSkill( $skill_id )
  * createPing( $array_of_parameters )
+ *
  * **********************************
  * Availability Functions
  * **********************************
