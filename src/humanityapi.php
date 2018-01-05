@@ -734,16 +734,32 @@ class HumanityApi
      ******************************************************************
      */
 
-    public function getAPIConfig( )
+    /**
+     * Returns all config properties used in Humanity for date, time, display and error codes.
+     * Level 5 is required.
+     *
+     * @param array $params
+     * @return mixed
+     */
+    public function getAPIConfig( $params = array( ) )
     {// get api config
         return $this->setRequest(
-            array(
-                'module' => 'api.config',
-                'method' => 'GET'
+            array_merge(
+                array(
+                    'module' => 'api.config',
+                    'method' => 'GET'
+                ),
+                $params
             )
         );
     }
 
+    /**
+     * Returns a list of all methods supported by the Humanity API and their support variables and variable types.
+     * Level 5 is required.
+     *
+     * @return mixed
+     */
     public function getAPIMethods( )
     {// get all available api methods
         return $this->setRequest(
@@ -762,6 +778,12 @@ class HumanityApi
      ******************************************************************
      */
 
+    /**
+     * Returns a list of all modules, methods and their support variables and types.
+     * Level 5 is required.
+     *
+     * @return mixed
+     */
     public function getAdminSettings( )
     {// get admin settings
         return $this->setRequest(
@@ -772,6 +794,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Updates admin settings.
+     * Level 2 is required.
+     *
+     * @param array $settings
+     * @return mixed
+     */
     public function updateAdminSettings( $settings = array( ) )
     {// update admin settings
         return $this->setRequest(
@@ -785,16 +814,73 @@ class HumanityApi
         );
     }
 
-    public function getAdminFiles( )
-    {// get administrator file listing
+    /**
+     * Returns the details for the organization of the currently logged in user.
+     * Level 5 is required.
+     *
+     * @return mixed
+     */
+    public function getAdminDetails( )
+    {// get admin details
         return $this->setRequest(
             array(
-                'module' => 'admin.files',
+                'module' => 'admin.details',
                 'method' => 'GET'
             )
         );
     }
 
+    /**
+     * Updates the details for the organization of the currently logged in user.
+     * Level 2 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
+    public function updateAdminDetails( $details = array( ) )
+    {// update admin details
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'admin.details',
+                    'method' => 'UPDATE'
+                ),
+                $details
+            )
+        );
+    }
+
+    /**
+     * Retrieves a list of all files uploaded into Humanity.
+     * If training id is forwarded through parameter 'training' the module retrieves the Training Files.
+     * If employee id is forwarded through parameter 'employee' the module retrieves the Employee Files.
+     * If no parameters are forwarded module retrieves Admin Files.
+     * Display limit is 50.
+     * Level 5 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
+    public function getAdminFiles( $details = array( ) )
+    {// get admin files
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'admin.files',
+                    'method' => 'GET'
+                ),
+                $details
+            )
+        );
+    }
+
+    /**
+     * Retrieves the setting details on a given file.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getAdminFileDetails( $id )
     {// get admin file details
         return $this->setRequest(
@@ -806,6 +892,14 @@ class HumanityApi
         );
     }
 
+    /**
+     * Updates details of any given file uploaded.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @param array $details
+     * @return mixed
+     */
     public function updateAdminFile( $id, $details = array( ) )
     {// update admin file details
         return $this->setRequest(
@@ -820,6 +914,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Uploads and creates details for any given file.
+     * Level 3 is required.
+     *
+     * @param array $file_details
+     * @return mixed
+     */
     public function createAdminFile( $file_details = array( ) )
     {// create new admin file
         $file_details = array_merge( $file_details, $this->getFileData( $file_details['filename'] ) );
@@ -834,6 +935,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Deletes any given file and file details.
+     * Level 3 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function deleteAdminFile( $id )
     {// delete admin file
         return $this->setRequest(
@@ -845,6 +953,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves a list of all Backups uploaded into Humanity.
+     * Display limit of 50.
+     * Level 5 is required.
+     *
+     * @return mixed
+     */
     public function getAdminBackups( )
     {// get admin backups
         return $this->setRequest(
@@ -855,6 +970,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves details of any given backup file.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getAdminBackupDetails( $id )
     {// get admin backup details
         return $this->setRequest(
@@ -866,6 +988,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Creates new backup file and backup file details.
+     * Level 5 is required.
+     *
+     * @param array $backup_details
+     * @return mixed
+     */
     public function createAdminBackup( $backup_details = array( )  )
     {// create an admin backup
         $backup_details = array_merge( $backup_details, $this->getFileData( $backup_details['filename'] ) );
@@ -880,6 +1009,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Deletes any given backup file and backup file details.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function deleteAdminBackup( $id )
     {// delete an admin backup
         return $this->setRequest(
@@ -891,6 +1027,88 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves a count of all requests.  Available shifts, vacations needing approving, shifts needing approving,
+     * shifts pickups needing approval, shift trades needing approval before or after, and shifts available to pickup.
+     * Level 3 is required.
+     *
+     * @return mixed
+     */
+    public function getAdminNRequests( )
+    {// get admin nrequest
+        return $this->setRequest(
+            array(
+                'module' => 'admin.nrequest',
+                'method' => 'GET'
+            )
+        );
+    }
+
+    /**
+     * Retrieves a business details.
+     * Level 5 is required.
+     *
+     * @return mixed
+     */
+    public function getAdminBusiness( )
+    {// get admin business
+        return $this->setRequest(
+            array(
+                'module' => 'admin.business',
+                'method' => 'GET'
+            )
+        );
+    }
+
+    /**
+     * Retrieves an employees group perms.
+     * If you specify id, reteives selected employees perms.
+     * Level 5 is required.
+     *
+     * @param array $params
+     * @return mixed
+     */
+    public function getAdminGroupPerms( $params = array( ) )
+    {// get admin group perms
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'admin.group_perms',
+                    'method' => 'GET'
+                ),
+                $params
+            )
+        );
+    }
+
+    /**
+     * Updates an employees group perms.
+     * Level 5 is required.
+     *
+     * @param array $group_perms
+     * @return mixed
+     */
+    public function updateAdminGroupPerms( $group_perms = array( ) )
+    {// update admin group perms
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'admin.group_perms',
+                    'method' => 'UPDATE'
+                ),
+                $group_perms
+            )
+        );
+    }
+
+    /**
+     * Unused for now
+     */
+    public function deleteAdminAvatar( )
+    {// here for future use, was undocumented as of 1/5/2018
+
+    }
+
 
 
     /**
@@ -899,17 +1117,32 @@ class HumanityApi
      ******************************************************************
      */
 
+    /**
+     * Returns an array that contains all user messages.
+     * You can specify if you want to retrieve just send, or receive messages, with parater 'mode'.
+     * Level 5 is required.
+     *
+     * @param string $mode
+     * @return mixed
+     */
     public function getMessages( $mode = 'to' )
     {// get messages for the currently logged in user
         return $this->setRequest(
             array(
                 'module' => 'messaging.messages',
                 'method' => 'GET',
-                'mod'    => $mode
+                'mode'    => $mode
             )
         );
     }
 
+    /**
+     * Retrieves a specific message by id.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getMessageDetails( $id )
     {// get message details for a specific message
         return $this->setRequest(
@@ -921,6 +1154,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Creates a new message.
+     * Level 5 is required.
+     *
+     * @param array $message
+     * @return mixed
+     */
     public function createMessage( $message = array( ) )
     {// create a new message
         return $this->setRequest(
@@ -934,6 +1174,33 @@ class HumanityApi
         );
     }
 
+    /**
+     * Updates a message.
+     * Level 5 is required.
+     *
+     * @param array $message
+     * @return mixed
+     */
+    public function updateMessage( $message = array( ) )
+    {// update messaging message
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'messaging.message',
+                    'method' => 'UPDATE'
+                ),
+                $message
+            )
+        );
+    }
+
+    /**
+     * Deletes a message.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function deleteMessage( $id )
     {// delete a message
         return $this->setRequest(
@@ -945,6 +1212,32 @@ class HumanityApi
         );
     }
 
+    /**
+     * Send a message to all staff in shift.
+     * Level 5 is required.
+     *
+     * @param array $message_details
+     * @return mixed
+     */
+    public function createShiftMessage( $message_details = array( ) )
+    {// create messaging shift
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'messaging.shift',
+                    'method' => 'CREATE'
+                ),
+                $message_details
+            )
+        );
+    }
+
+    /**
+     * Get wall message and comments.
+     * Level 5 is required.
+     *
+     * @return mixed
+     */
     public function getWallMessages( )
     {// get message wall
         return $this->setRequest(
@@ -955,6 +1248,15 @@ class HumanityApi
         );
     }
 
+    /**
+     * Creates a new wall message or comment.
+     * If message id is being specified, comment is added.  Else, new message is being created.
+     * User can create new wall messages/comments, only if it is enabled in admin settings.
+     * Level 5 is required.
+     *
+     * @param array $message
+     * @return mixed
+     */
     public function createWallMessage( $message = array( ) )
     {// create a wall message
         return $this->setRequest(
@@ -968,6 +1270,14 @@ class HumanityApi
         );
     }
 
+    /**
+     * Deletes wall message or comment.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @param array $details
+     * @return mixed
+     */
     public function deleteWallMessage( $id, $details = array( ) )
     {// delete a wall message
         return $this->setRequest(
@@ -982,6 +1292,99 @@ class HumanityApi
         );
     }
 
+    /**
+     * Undocumented method, please update when available.
+     *
+     * @param array $params
+     * @return mixed
+     */
+    public function getMessagingNotices( $params = array( ) )
+    {
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'messaging.notices',
+                    'method' => 'GET'
+                ),
+                $params
+            )
+        );
+    }
+
+    /**
+     * Undocumented method, please update when available.
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getMessagingNoticeDetails( $id )
+    {// get messaging notice details for a specific message
+        return $this->setRequest(
+            array(
+                'module' => 'messaging.notice',
+                'method' => 'GET',
+                'id' => $id
+            )
+        );
+    }
+
+    /**
+     * Undocumented method, please update when available.
+     *
+     * @param $id
+     * @param array $details
+     * @return mixed
+     */
+    public function updateMessagingNotice( $id, $details = array( ) )
+    {// update messaging notice
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'messaging.notice',
+                    'method' => 'UPDATE',
+                    'id' => $id
+                ),
+                $details
+            )
+        );
+    }
+
+    /**
+     * Undocumented method, please update when available.
+     *
+     * @param array $details
+     * @return mixed
+     */
+    public function createMessagingNotice( $details = array( ) )
+    {// create messaging notice
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'messaging.notice',
+                    'method' => 'CREATE'
+                ),
+                $details
+            )
+        );
+    }
+
+    /**
+     * Undocumented method, please update when available.
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function deleteMessagingNotice( $id )
+    {// delete messaging notice details for a specific message
+        return $this->setRequest(
+            array(
+                'module' => 'messaging.notice',
+                'method' => 'DELETE',
+                'id' => $id
+            )
+        );
+    }
+
 
 
     /**
@@ -990,6 +1393,13 @@ class HumanityApi
      ******************************************************************
      */
 
+    /**
+     * Retrieves a list of schedule reports between selected dates.
+     * Level 5 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsSchedule( $details = array( ) )
     {
         return $this->setRequest(
@@ -1003,6 +1413,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves budget reports, between selected dates.
+     * Level 3 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsBudget( $details = array( ) )
     {
         return $this->setRequest(
@@ -1016,6 +1433,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves a list of timesheet reports.
+     * Level 5 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsTimesheets( $details = array( ) )
     {
         return $this->setRequest(
@@ -1029,6 +1453,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves a list of employee's reports.
+     * Level 5 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsEmployee( $details = array( ) )
     {
         return $this->setRequest(
@@ -1042,6 +1473,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves a list of custom reports.
+     * Level 3 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsCustom( $details = array( ) )
     {
         return $this->setRequest(
@@ -1055,6 +1493,12 @@ class HumanityApi
         );
     }
 
+    /**
+     * Undocumented method, please update when available.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsDailyPeakHoursNew( $details = array( ) )
     {
         return $this->setRequest(
@@ -1068,6 +1512,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves daily peak hours between selected dates.
+     * Level 3 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsDailyPeakHours( $details = array( ) )
     {
         return $this->setRequest(
@@ -1081,6 +1532,12 @@ class HumanityApi
         );
     }
 
+    /**
+     * Undocumented method, please update when available.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsGoogle( $details = array( ) )
     {
         return $this->setRequest(
@@ -1094,6 +1551,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Returns a list of worked units.
+     * Level 5 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsWorkUnits( $details = array( ) )
     {
         return $this->setRequest(
@@ -1107,6 +1571,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Returns a list of worked units.
+     * Level 5 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsWuDailyReport( $details = array( ) )
     {
         return $this->setRequest(
@@ -1120,6 +1591,12 @@ class HumanityApi
         );
     }
 
+    /**
+     * Undocumented method, please update when available.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getReportsForecast( $details = array( ) )
     {
         return $this->setRequest(
@@ -1149,6 +1626,13 @@ class HumanityApi
      ******************************************************************
      */
 
+    /**
+     * Run payroll specific reports on schedule / time sheet data.
+     * Level 3 is required.
+     *
+     * @param array $report_details
+     * @return mixed
+     */
     public function getPayrollReport( $report_details = array( ) )
     {// get payroll report
         return $this->setRequest(
@@ -1162,6 +1646,12 @@ class HumanityApi
         );
     }
 
+    /**
+     * Undocumented method, please update when available.
+     *
+     * @param array $report_details
+     * @return mixed
+     */
     public function getPayrollEnhancedReport( $report_details = array( ) )
     {// get payroll enhancedreport
         return $this->setRequest(
@@ -1175,6 +1665,12 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves a list of payroll rate cards.
+     * Level 5 is required.
+     *
+     * @return mixed
+     */
     public function getRatecards( )
     {// get payroll ratecards
         return $this->setRequest(
@@ -1185,7 +1681,14 @@ class HumanityApi
         );
     }
 
-    public function getRatecard( $id )
+    /**
+     * Retrieves a payroll rate card by id.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getRatecardDetails( $id )
     {// get payroll ratecard
         return $this->setRequest(
             array(
@@ -1196,6 +1699,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Creates a payroll rate card.
+     * Level 3 is required.
+     *
+     * @param array $ratecard_details
+     * @return mixed
+     */
     public function createRatecard( $ratecard_details = array( ) )
     {// create payroll ratecard
         return $this->setRequest(
@@ -1209,6 +1719,14 @@ class HumanityApi
         );
     }
 
+    /**
+     * Updates a payroll rate card.
+     * Level 3 is required.
+     *
+     * @param $id
+     * @param array $ratecard_details
+     * @return mixed
+     */
     public function updateRatecard( $id, $ratecard_details = array( ) )
     {// update payroll ratecard
         return $this->setRequest(
@@ -1223,6 +1741,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Deletes a payroll rate card.
+     * Level 3 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function deleteRatecard( $id )
     {// delete payroll ratecard
         return $this->setRequest(
@@ -1241,6 +1766,12 @@ class HumanityApi
      ******************************************************************
      */
 
+    /**
+     * Retrieves a list of all schedules.
+     * Level 5 is required.
+     *
+     * @return mixed
+     */
     public function getSchedules( )
     {// get schedules
         return $this->setRequest(
@@ -1251,6 +1782,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves an individual schedule.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getScheduleDetails( $id )
     {// get schedule details
         return $this->setRequest(
@@ -1262,6 +1800,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Creates an individual schedule.
+     * Level 3 is required.
+     *
+     * @param array $schedule_details
+     * @return mixed
+     */
     public function createSchedule( $schedule_details = array( ) )
     {// create a new schedule
         return $this->setRequest(
@@ -1275,6 +1820,14 @@ class HumanityApi
         );
     }
 
+    /**
+     * Updates an individual schedule
+     * Level 3 is required.
+     *
+     * @param $id
+     * @param array $schedule_details
+     * @return mixed
+     */
     public function updateSchedule( $id, $schedule_details = array( ) )
     {// update an existing schedule
         return $this->setRequest(
@@ -1289,6 +1842,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Deletes an individual schedule.
+     * Level 3 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function deleteSchedule( $id )
     {// delete an existing schedule
         return $this->setRequest(
@@ -1300,6 +1860,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves a list of shifts.
+     * Level 5 is required.
+     *
+     * @param array $shift_filters
+     * @return mixed
+     */
     public function getShifts( $shift_filters = array() )
     {// get shifts
         return $this->setRequest(
@@ -1313,6 +1880,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves an individual shift.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getShiftDetails( $id )
     {// get shift details
         return $this->setRequest(
@@ -1324,6 +1898,14 @@ class HumanityApi
         );
     }
 
+    /**
+     * Updates an individual shift.
+     * Level 3 is required.
+     *
+     * @param $id
+     * @param array $shift_details
+     * @return mixed
+     */
     public function updateShift( $id, $shift_details = array( ) )
     {// update shift details
         return $this->setRequest(
@@ -1338,6 +1920,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Creates an individual shift.
+     * Level 3 is required.
+     *
+     * @param array $shift_details
+     * @return mixed
+     */
     public function createShift( $shift_details = array( ) )
     {// create a new shift
         return $this->setRequest(
@@ -1351,6 +1940,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Deletes an individual shift.
+     * Level 3 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function deleteShift( $id )
     {// delete a shift
         return $this->setRequest(
@@ -1362,6 +1958,90 @@ class HumanityApi
         );
     }
 
+    /**
+     * Undocumented method, please update when available.
+     *
+     * @param array $params
+     * @return mixed
+     */
+    public function getShiftHistory( $params = array( ) )
+    {// get schedule shift history
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'schedule.shifthistory',
+                    'method' => 'GET'
+                ),
+                $params
+            )
+        );
+    }
+
+    /**
+     * Retrieves an individual shift that needs approval.
+     * Level 3 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getShiftApproval( $id )
+    {// get schedule shift approval
+        return $this->setRequest(
+            array(
+                'module' => 'schedule.shiftapprove',
+                'method' => 'GET',
+                'id' => $id
+            )
+        );
+    }
+
+    /**
+     * Confirms an individual shift.
+     * Level 3 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function createShiftApproval( $id )
+    {// create schedule shift approval
+        return $this->setRequest(
+            array(
+                'module' => 'schedule.shiftapprove',
+                'method' => 'CREATE',
+                'id' => $id
+            )
+        );
+    }
+
+    /**
+     * Updates an individual shift.
+     * Level 3 is required.
+     *
+     * @param $id
+     * @param array $shift_details
+     * @return mixed
+     */
+    public function updateShiftApproval( $id, $shift_details = array( ) )
+    {// update a shift approval
+        return $this->setRequest(
+            array_merge(
+                array(
+                    'module' => 'schedule.shiftapprove',
+                    'method' => 'UPDATE',
+                    'id' => $id
+                ),
+                $shift_details
+            )
+        );
+    }
+
+    /**
+     * Retrieves a list of vacations.
+     * Level 5 is required.
+     *
+     * @param array $time_period
+     * @return mixed
+     */
     public function getVacationSchedules( $time_period = array( ) )
     {// get schedule vacations, pass start and end params to get vacations within a certian time-period
         return $this->setRequest(
@@ -1375,6 +2055,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves an individual vacation.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getVacationScheduleDetails( $id )
     {// get vacation schedule details
         return $this->setRequest(
@@ -1386,6 +2073,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Creates an individual vacation.
+     * Level 5 is required.
+     *
+     * @param array $vacation_details
+     * @return mixed
+     */
     public function createVacationSchedule( $vacation_details = array( ) )
     {// create a vacation schedule
         return $this->setRequest(
@@ -1399,6 +2093,14 @@ class HumanityApi
         );
     }
 
+    /**
+     * Updates an individual vacation.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @param array $vacation_details
+     * @return mixed
+     */
     public function updateVacationSchedule( $id, $vacation_details = array( ) )
     {// update a vacation schedule
         return $this->setRequest(
@@ -1413,6 +2115,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Deletes an individual vacation.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function deleteVacationSchedule( $id )
     {// delete a vacation schedule
         return $this->setRequest(
@@ -1424,6 +2133,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Retrieves a list of schedule conflicts.
+     * Level 5 is required.
+     *
+     * @param array $time_period
+     * @return mixed
+     */
     public function getScheduleConflicts( $time_period = array( ) )
     {// get schedule conflicts
         return $this->setRequest(
@@ -1445,6 +2161,13 @@ class HumanityApi
      ******************************************************************
      */
 
+    /**
+     * Returns a list of schedules.
+     * Level 5 is required.
+     *
+     * @param $details
+     * @return mixed
+     */
     public function getTimeclocks($details) {
         return $this->setRequest(
             array_merge(
@@ -1457,6 +2180,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Returns array of timesheets for the specified period.
+     * Level 5 is required.
+     *
+     * @param $details
+     * @return mixed
+     */
     public function getTimesheets($details) {
         return $this->setRequest(
             array_merge(
@@ -1477,6 +2207,12 @@ class HumanityApi
      ******************************************************************
      */
 
+    /**
+     * Sends user login information.  Returns status, data and token.
+     *
+     * @param array $user
+     * @return mixed
+     */
     public function doLogin( $user = array( ) )
     {// perform a login api call
         return $this->setRequest(
@@ -1489,11 +2225,41 @@ class HumanityApi
         );
     }
 
+    /**
+     * Logs out current user.  Terminates valid token.
+     * Level 5 is required.
+     */
     public function doLogout( )
     {// erase token and user data from current session
         $this->destroySession( );
     }
 
+    /**
+     * Recieves details about current logged in user.
+     * Level 7 required.
+     *
+     * @return mixed
+     */
+    public function getMe( )
+    {// get staff me
+        return $this->setRequest(
+            array(
+                'module' => 'staff.me',
+                'method' => 'GET'
+            )
+        );
+    }
+
+    /**
+     * Returns array of all employees (activated, not activated). If you have specified schedule or location,
+     * it will return array of all employees related to specified schedule or location.
+     * Disabled employees can be retrieved with parameter "disabled":1.
+     * Not activated employees can be retrieved with "inactive":1.
+     * Level 5 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getEmployees( $details = array( ) )
     {// get a list of employees
         return $this->setRequest(
@@ -1507,6 +2273,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Returns employee info.  You have to specify employee id or eid.
+     * Level 5 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function getEmployee( $details = array( ) )
     {// get details for a specific employee
         return $this->setRequest(
@@ -1520,6 +2293,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Updates employees account.
+     * Level 3 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function updateEmployee( $details = array( ) )
     {// update an employee record
         return $this->setRequest(
@@ -1533,6 +2313,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Creates new employee.
+     * Level 3 is required.
+     *
+     * @param array $details
+     * @return mixed
+     */
     public function createEmployee( $details = array( ) )
     {// create a new employee record
         return $this->setRequest(
@@ -1546,6 +2333,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Deletes employees account.
+     * Level 3 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function deleteEmployee( $id )
     {// delete an employee
         return $this->setRequest(
@@ -1557,6 +2351,12 @@ class HumanityApi
         );
     }
 
+    /**
+     * Returns an array of all skills.
+     * Level 5 is required.
+     *
+     * @return mixed
+     */
     public function getStaffSkills( )
     {// get staff skills
         return $this->setRequest(
@@ -1567,6 +2367,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Returns skill specified by id.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getStaffSkillDetails( $id )
     {// get staff skill details
         return $this->setRequest(
@@ -1578,6 +2385,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Creates a new skill.
+     * Level 5 is required.
+     *
+     * @param array $skill_details
+     * @return mixed
+     */
     public function createStaffSkill( $skill_details = array( ) )
     {// create staff skill
         return $this->setRequest(
@@ -1591,6 +2405,14 @@ class HumanityApi
         );
     }
 
+    /**
+     * Updates a skill.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @param array $skill_details
+     * @return mixed
+     */
     public function updateStaffSkill( $id, $skill_details = array( ) )
     {// update staff skill
         return $this->setRequest(
@@ -1605,6 +2427,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Deletes a skill.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function deleteStaffSkill( $id )
     {// delete staff skill
         return $this->setRequest(
@@ -1616,6 +2445,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Ping a user.
+     * Level 5 is required.
+     *
+     * @param array $ping_data
+     * @return mixed
+     */
     public function createPing( $ping_data = array( ) )
     {// create a ping
         return $this->setRequest(
@@ -1645,6 +2481,13 @@ class HumanityApi
      ******************************************************************
      */
 
+    /**
+     * Returns an array that contains all locations.
+     * Level 5 is required.
+     *
+     * @param array $location_details
+     * @return mixed
+     */
     public function getLocations( $location_details = array( ) ) 
     {// get location locations
         return $this->setRequest(
@@ -1658,19 +2501,31 @@ class HumanityApi
         );
     }
 
-    public function getLocation( $location_details = array( ) )
+    /**
+     * Retrieves an individual location specified by id.
+     * Level 5 is required.
+     *
+     * @param array $location_details
+     * @return mixed
+     */
+    public function getLocationDetails( $id )
     {// get location location
         return $this->setRequest(
-            array_merge(
-                array(
-                    'module' => 'location.location',
-                    'method' => 'GET'
-                ),
-                $location_details
+            array(
+                'module' => 'location.location',
+                'method' => 'GET',
+                'id' => $id
             )
         );
     }
 
+    /**
+     * Creates a new location.
+     * Level 5 is required.
+     *
+     * @param array $location_details
+     * @return mixed
+     */
     public function createLocation( $location_details = array( ) )
     {// create location location
         return $this->setRequest(
@@ -1684,6 +2539,14 @@ class HumanityApi
         );
     }
 
+    /**
+     * Updates a location.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @param array $location_details
+     * @return mixed
+     */
     public function updateLocation( $id, $location_details = array( ) )
     {// update location location
         return $this->setRequest(
@@ -1698,6 +2561,13 @@ class HumanityApi
         );
     }
 
+    /**
+     * Deletes a location.
+     * Level 5 is required.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function deleteLocation( $id )
     {// delete location location
         return $this->setRequest(
@@ -1748,4 +2618,3 @@ class HumanityApi
 
 
 }
-?>
