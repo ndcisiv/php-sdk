@@ -21,7 +21,7 @@ have is:
 
 	require './humanityapi.php';
 
-	$humanityapi = new humanityapi(
+	$humanityapi = new HumanityApi(
 		array(
 			'key' => 'XXXXXXXXXXXXXXXXXX' // enter your developer key
 		)
